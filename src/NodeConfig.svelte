@@ -1,5 +1,6 @@
 <script>
     import { config, selectedNode } from './stores.js';
+    import { createNode } from './Services/NodeFactory.js';
     import ScalarNodeComponent from './Node/ScalarNodeComponent.svelte';
     import BooleanNodeComponent from './Node/BooleanNodeComponent.svelte';
     import IntegerNodeComponent from './Node/IntegerNodeComponent.svelte';
@@ -7,10 +8,7 @@
     import EnumNodeComponent from './Node/EnumNodeComponent.svelte';
     import ArrayNodeComponent from './Node/ArrayNodeComponent.svelte';
 
-    let node;
-    const u = selectedNode.subscribe(n => {
-        node = n;
-    });
+    export let node;
 
     const components = {
         scalar: ScalarNodeComponent,
@@ -39,37 +37,42 @@
         });
         selectedNode.set(null);
     }
+
+    function cancel() {
+        selectedNode.set(null);
+    }
 </script>
 
-{#if node && node.type != undefined}
-    <div>
-        <p>Add node of type "{node.type}"</p>
+<div class="node-config">
+    <h2 class="node-config-title">Add a node of type "{node.type}"</h2>
 
-        <div>
-            <label for="name">Name</label>
-            <input id="name" type="text" bind:value={node.name}>
+    <div class="config-form">
+        <div class="config-row">
+            <label for="name-{node.id}">Name</label>
+            <input id="name-{node.id}" type="text" bind:value={node.name}>
         </div>
-        <div>
+        <div class="config-row">
             <label>
                 Required ?
                 <input type="checkbox" bind:checked={node.options.required}>
             </label>
         </div>
-        <div>
+        <div class="config-row">
             <label>
                 Cannot be empty ?
                 <input type="checkbox" bind:checked={node.options.cannotBeEmpty}>
             </label>
         </div>
-        <div>
-            <label>
-                Info
-                <input type="text" bind:value={node.options.info}>
-            </label>
+        <div class="config-row">
+            <label for="info-{node.id}">Info</label>
+            <input type="text" id="info-{node.id}" bind:value={node.options.info}>
         </div>
 
         <svelte:component this={components[node.type]} {node}/>
 
-        <button on:click={configDone}>Done</button>
+        <div class="config-row">
+            <button on:click={configDone}>Done</button>
+            <button on:click={cancel}>Cancel</button>
+        </div>
     </div>
-{/if}
+</div>

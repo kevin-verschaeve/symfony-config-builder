@@ -8,15 +8,15 @@
     }
 </script>
 
-<div>
-    <p>Valeurs autorisées: {node.options.allowedValues.join(',')}</p>
+<div class="config-row">
+    <p>Allowed values: {node.options.allowedValues.join(',')}</p>
 
-    <label for="newValue">Ajouter une valeur</label>
+    <label for="newValue">Add a new value</label>
     <input id="newValue" type="text" bind:value={newValue}>
     <button on:click={addAllowedValue}>ok</button>
 </div>
-<div>
-    <label for="default">Valeur par défaut</label>
+<div class="config-row">
+    <label for="default">Default value</label>
     <select bind:value={node.options.defaultValue}>
         <option></option>
         {#each node.options.allowedValues as value}

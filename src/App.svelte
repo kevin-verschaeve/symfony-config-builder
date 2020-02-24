@@ -1,24 +1,24 @@
 <script>
-    import { config } from './stores.js';
+    import { config, selectedNode } from './stores.js';
     import { getConfigTreeBuilder } from './Services/ConfigWriter.js';
-    import NodeConfig from './NodeConfig.svelte';
     import Configuration from './Configuration.svelte';
     import ConfigManager from './Services/ConfigManager.js';
 
     ConfigManager.load();
 
+    let tree;
     let configuration = [];
-    let ready = false;
     let yaml = false;
     const u = config.subscribe(conf => {
         configuration = conf;
-        ready = conf.length > 0;
         ConfigManager.save($config);
+        buildTree();
     });
 
-    let tree;
     function buildTree() {
-        tree = getConfigTreeBuilder(configuration);
+        if (configuration.length) {
+            tree = getConfigTreeBuilder(configuration);
+        }
     }
 
     function clear() {
@@ -41,26 +41,24 @@
 </script>
 
 <h1 class="center">Config Tree Builder Builder</h1>
+<div class="center">
+    {#if configuration.length}
+    <button on:click={() => yaml = !yaml}>To Yaml</button>
+    <button on:click={clear}>Clear</button>
+    {/if}
+</div>
 <div class="flexbox-container">
     <div class="configuration" class:yaml>
         <Configuration/>
-        {#if ready}
-            <button on:click={buildTree}>Get config tree builder</button>
-            <button on:click={() => yaml = !yaml}>To Yaml</button>
-        {/if}
-        {#if configuration.length}
-            <button on:click={clear}>Clear</button>
-        {/if}
     </div>
     <div>
-        <NodeConfig/>
-
-        {#if tree}
+    {#if tree}
         <button on:click={copyToClipBoard}>Copy to clipboard</button>
         {#if copied}
             Copied to clipboard !
         {/if}
         <pre>
+            <code>
         {`
 <?php
 
@@ -77,25 +75,9 @@ ${tree}
     }
 }
 `}
+            </code>
         </pre>
-        {/if}
+    {/if}
     </div>
 </div>
 Icons made by <a href="https://www.flaticon.com/authors/kiranshastry" title="Kiranshastry">Kiranshastry</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
-
-<style>
-.flexbox-container {
-    display: -ms-flex;
-    display: -webkit-flex;
-    display: flex;
-}
-
-.flexbox-container > div {
-    width: 50%;
-    padding: 10px;
-}
-
-.flexbox-container > div:first-child {
-    margin-right: 20px;
-}
-</style>

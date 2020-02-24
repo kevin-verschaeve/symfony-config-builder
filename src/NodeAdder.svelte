@@ -14,6 +14,12 @@
 
     let selected;
     function selectNode() {
+        if (!selected.value) {
+            selectedNode.set(null);
+
+            return;
+        }
+
         let node = createNode(selected.value);
         node.parent = parent;
         selectedNode.set(node);

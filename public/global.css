@@ -69,6 +69,17 @@ button:focus {
 	text-align: center;
 }
 
+.flexbox-container {
+    display: -ms-flex;
+    display: -webkit-flex;
+    display: flex;
+}
+
+.flexbox-container > div {
+    width: 50%;
+    padding: 10px;
+}
+
 .configuration.yaml {
 	white-space: pre;
 }
@@ -77,6 +88,28 @@ button:focus {
 	display: none;
 }
 
+.raw-node {
+	padding-right: 15px;
+}
+
 .configuration .indent {
-    margin-left: 20px;
+	margin-left: 20px;
+}
+
+.node-config--modal {
+	padding: 10px;
+	background-color: #FFF;
+}
+
+.node-config-title {
+	margin: 0;
+}
+
+.node-config .config-form .config-row {
+	padding: 5px 5px;
+}
+
+.node-config .config-form .config-row input[type="text"] {
+	display: block;
+	width: 100%;
 }

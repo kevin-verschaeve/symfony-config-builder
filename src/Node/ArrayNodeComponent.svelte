@@ -2,9 +2,9 @@
 export let node;
 </script>
 
-<div>
+<div class="config-row">
     <label>
+        Prototype ?
         <input type="checkbox" bind:checked={node.options.isPrototype}>
-        Protoype ?
     </label>
 </div>

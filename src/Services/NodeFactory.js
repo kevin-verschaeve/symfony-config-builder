@@ -23,7 +23,7 @@ export function createNode(type) {
         case 'root':
             return new RootNode();
         default:
-            throw new Error('Invalid type '+type);
+            return;
     }
 }
 
@@ -34,6 +34,7 @@ export function createNodeFromConfig(config) {
     node.type = config.type;
     node.options = config.options;
     node.parent = config.parent;
+    node.isNew = false;
 
     return node;
 }
