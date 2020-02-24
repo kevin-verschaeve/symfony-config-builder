@@ -113,3 +113,9 @@ button:focus {
 	display: block;
 	width: 100%;
 }
+
+#logos {
+	position: fixed;
+	top: 3%;
+	left: 95%;
+}

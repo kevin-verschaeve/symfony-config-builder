@@ -81,3 +81,9 @@ ${tree}
     </div>
 </div>
 Icons made by <a href="https://www.flaticon.com/authors/kiranshastry" title="Kiranshastry">Kiranshastry</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
+
+<div id="logos">
+    <a href="https://github.com/kevin-verschaeve/symfony-config-builder" target="_blank" title="Contribute">
+        <img src="/github.png" alt="Github repository" width="24">
+    </a>
+</div>
