@@ -8,13 +8,13 @@ export default class FloatNode extends ConfigNode {
     specific(spaces) {
         let php = '';
         if (this.options.defaultValue) {
-            php += `\n${spaces}->defaultValue(${parseFloat(this.options.defaultValue)})`;
+            php += `\n${spaces}->defaultValue(${parseFloat(this.options.defaultValue) || 0.0})`;
         }
         if (this.options.min) {
-            php += `\n${spaces}->min(${parseFloat(this.options.min)})`;
+            php += `\n${spaces}->min(${parseFloat(this.options.min) || 0.0})`;
         }
         if (this.options.max) {
-            php += `\n${spaces}->max(${parseFloat(this.options.max)})`;
+            php += `\n${spaces}->max(${parseFloat(this.options.max) || 0.0})`;
         }
 
         return php;
