@@ -43,7 +43,7 @@
 <h1 class="center">Config Tree Builder Builder</h1>
 <div class="center">
     {#if configuration.length}
-    <button on:click={() => yaml = !yaml}>To Yaml</button>
+    <button on:click={() => yaml = !yaml}>{yaml ? 'Builder' : 'To Yaml'}</button>
     <button on:click={clear}>Clear</button>
     {/if}
 </div>
