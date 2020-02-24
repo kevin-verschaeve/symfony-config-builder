@@ -3,6 +3,10 @@
 
     let newValue;
     function addAllowedValue() {
+        if (!newValue.trim()) {
+            return;
+        }
+
         node.options.allowedValues = [...node.options.allowedValues, newValue];
         newValue = null;
     }
