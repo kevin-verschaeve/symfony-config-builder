@@ -2,7 +2,7 @@ import ConfigNode from './ConfigNode.js';
 
 export default class EnumNode extends ConfigNode {
     constructor(name = '', options = {}) {
-        super(name, Object.assign({}, {allowedValues: []}, options));
+        super(name, Object.assign({}, {defaultValue: null, allowedValues: []}, options));
     }
 
     yaml() {
