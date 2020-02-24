@@ -8,3 +8,6 @@ You can add any nodes as needed and when you are done, copy the result (that is 
 and paste it into your Symfony project.
 
 [https://symfony-config-builder.now.sh/](https://symfony-config-builder.now.sh/)
+
+## Example
+![Example](https://symfony-config-builder.now.sh/tree_builder_builder_example.png)
