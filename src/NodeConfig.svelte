@@ -43,10 +43,10 @@
 
 {#if node && node.type != undefined}
     <div>
-        <p>Ajouter un node de type "{node.type}"</p>
+        <p>Add node of type "{node.type}"</p>
 
         <div>
-            <label for="name">Nom</label>
+            <label for="name">Name</label>
             <input id="name" type="text" bind:value={node.name}>
         </div>
         <div>
@@ -70,6 +70,6 @@
 
         <svelte:component this={components[node.type]} {node}/>
 
-        <button on:click={configDone}>Terminer</button>
+        <button on:click={configDone}>Done</button>
     </div>
 {/if}

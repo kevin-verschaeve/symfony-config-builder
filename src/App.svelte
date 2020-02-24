@@ -56,7 +56,6 @@
         <NodeConfig/>
 
         {#if tree}
-        <p>Astuce : pour coller dans phpstorm sans perdre le formattage, coller avec le raccourci : Ctrl + Alt + Shift + V</p>
         <button on:click={copyToClipBoard}>Copy to clipboard</button>
         {#if copied}
             Copied to clipboard !
