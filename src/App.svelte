@@ -3,6 +3,8 @@
     import { getConfigTreeBuilder } from './Services/ConfigWriter.js';
     import Configuration from './Configuration.svelte';
     import ConfigManager from './Services/ConfigManager.js';
+    import Highlight from 'svelte-highlight';
+    import { php } from 'svelte-highlight/languages';
 
     ConfigManager.load();
 
@@ -18,6 +20,8 @@
     function buildTree() {
         if (configuration.length) {
             tree = getConfigTreeBuilder(configuration);
+        } else {
+            tree = '';
         }
     }
 
@@ -51,16 +55,13 @@
     <div class="configuration" class:yaml>
         <Configuration/>
     </div>
-    <div>
-    {#if tree}
-        <button on:click={copyToClipBoard}>Copy to clipboard</button>
+    <div id="code-panel">
+        <button on:click={copyToClipBoard} id="btn-copy">Copy to clipboard</button>
         {#if copied}
             Copied to clipboard !
         {/if}
-        <pre>
-            <code>
-        {`
-<?php
+        <Highlight language={php} code={
+`<?php
 
 namespace Acme\\MyBundleConfiguration;
 
@@ -73,12 +74,9 @@ class MyConfiguration implements ConfigurationInterface
     {
 ${tree}
     }
-}
-`}
-            </code>
-        </pre>
-    {/if}
-    </div>
+}`}
+/>
+        </div>
 </div>
 Icons made by <a href="https://www.flaticon.com/authors/kiranshastry" title="Kiranshastry">Kiranshastry</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
 
