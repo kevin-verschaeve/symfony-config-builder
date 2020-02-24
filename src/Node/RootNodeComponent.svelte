@@ -7,7 +7,15 @@
     let editing = false;
 
     function createRoot() {
-        return $config.find(n => n.type == 'root') || new RootNode(previous);
+        let root = $config.find(n => n.type == 'root');
+        if (root) {
+            return root;
+        }
+
+        root = new RootNode(previous);
+        config.set([root]);
+
+        return root;
     }
 
     function editRoot() {
