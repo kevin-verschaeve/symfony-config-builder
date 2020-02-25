@@ -48,13 +48,14 @@
 	.modal {
 		position: absolute;
 		left: 50%;
-		top: 30%;
+		top: 40%;
 		width: calc(100vw - 4em);
 		max-width: 32em;
 		max-height: calc(100vh - 4em);
 		overflow: auto;
 		transform: translate(-50%,-50%);
-		border-radius: 0.2em;
+		border-radius: 0;
+		box-shadow: 0px 0px 15px black;
 		background: white;
 	}
 </style>

@@ -56,16 +56,10 @@
             <input id="name-{node.id}" type="text" bind:value={node.name}>
         </div>
         <div class="config-row">
-            <label>
-                Required ?
-                <input type="checkbox" bind:checked={node.options.required}>
-            </label>
-        </div>
-        <div class="config-row">
-            <label>
-                Cannot be empty ?
-                <input type="checkbox" bind:checked={node.options.cannotBeEmpty}>
-            </label>
+            <input id="required-{node.id}" type="checkbox" bind:checked={node.options.required} class="node-config-checkbox">
+            <label for="required-{node.id}" class="node-config-checkbox-label">Required ?</label>
+            <input id="empty-{node.id}" class="node-config-checkbox" type="checkbox" bind:checked={node.options.cannotBeEmpty}>
+            <label for="empty-{node.id}" class="node-config-checkbox-label">Cannot be empty ?</label>
         </div>
         <div class="config-row">
             <label for="info-{node.id}">Info</label>
@@ -76,8 +70,8 @@
         {/if}
 
         <div class="config-row">
-            <button on:click={configDone}>Done</button>
-            <button on:click={cancel}>Cancel</button>
+            <button class="btn btn-ok" on:click={configDone}>Done</button>
+            <button class="btn btn-cancel btn-cancel-config" on:click={cancel}>Cancel</button>
         </div>
     </div>
 </div>

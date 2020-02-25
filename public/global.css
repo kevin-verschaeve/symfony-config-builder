@@ -47,12 +47,6 @@ input[type="range"] {
 	height: 0;
 }
 
-button {
-	color: #333;
-	background-color: #f4f4f4;
-	outline: none;
-}
-
 button:disabled {
 	color: #999;
 }
@@ -67,6 +61,18 @@ button:focus {
 
 .center {
 	text-align: center;
+}
+
+.inline-block {
+	display: inline-block;
+}
+
+.flex {
+	display: flex;
+}
+
+.flex-grow {
+	flex-grow: 1;
 }
 
 .flexbox-container {
@@ -99,6 +105,8 @@ button:focus {
 
 .node-config-title {
 	margin: 0;
+	text-align: center;
+	margin: 10px 0;
 }
 
 .node-config .config-form .config-row {
@@ -128,7 +136,7 @@ button:focus {
 .btn-copy {
 	position: absolute;
     right: 2%;
-    top: 2%;
+    top: 6%;
 }
 
 #copy-message {
@@ -145,4 +153,93 @@ button:focus {
 .svelte-highlight {
 	margin: 0;
 	border-radius: 10px;
+}
+
+.node-config .config-form .config-row input[type="text"].node-config-enum-value-adder {
+	width: 80%;
+	display: inline-block;
+}
+
+/* Checkboxes */
+.node-config-checkbox-label {
+    display: inline-block;
+    background-color: #FFF;
+    border: 2px solid #333;
+    color: #333;
+    border-radius: 25px;
+    white-space: nowrap;
+    margin: 3px 0px;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    transition: all .2s;
+    padding: 8px 12px;
+    cursor: pointer;
+}
+
+.node-config-checkbox-label::before {
+    display: inline-block;
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    padding: 2px 6px 2px 2px;
+}
+
+.node-config-checkbox:checked + label::before {
+    content: "✔";
+}
+
+.node-config-checkbox:checked + label {
+    border: 2px solid #1bdbf8;
+    background-color: #12bbd4;
+    color: #fff;
+    transition: all .2s;
+}
+
+.node-config-checkbox {
+  position: absolute;
+  opacity: 0;
+}
+
+.node-config-enum-value-list {
+	min-width: 20px;
+	display: inline-block;
+	background: #eaeaea;
+	padding: 5px;
+	border-radius: 5px;
+	border: 1px solid #cacaca;
+}
+
+/* Buttons */
+.btn {
+	color: #333;
+    background-color: #f4f4f4;
+    outline: none;
+    border-radius: 10px;
+    padding: 11px;
+    width: 100px;
+}
+
+.btn-ok {
+	background: #79cd79;
+	font-weight: bold;
+	color: #FFF;
+}
+
+.btn-cancel {
+    background: #e34747;
+    color: white;
+}
+
+.btn-cancel-config {
+	float: right;
+}
+
+.btn-enum-adder {
+	padding: 8px;
+	width: 19%;
 }

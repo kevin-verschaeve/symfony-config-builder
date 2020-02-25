@@ -1,5 +1,8 @@
 <script>
 export let node;
-node.name = '';
 </script>
-<input type="text" bind:value={node.name} autofocus>
+
+<div class="config-row">
+    <label for="root-{node.id}">Name:</label>
+    <input id="root-{node.id}" type="text" bind:value={node.name} autofocus>
+</div>

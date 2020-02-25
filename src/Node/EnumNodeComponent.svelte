@@ -13,16 +13,15 @@
 </script>
 
 <div class="config-row">
-    <p>Allowed values: {node.options.allowedValues.join(',')}</p>
-
-    <label for="newValue">Add a new value</label>
-    <input id="newValue" type="text" bind:value={newValue}>
-    <button on:click={addAllowedValue}>ok</button>
+    <label for="newValue-{node.id}">Add a new value</label>
+    <input id="newValue-{node.id}" type="text" bind:value={newValue} class="node-config-enum-value-adder">
+    <button on:click={addAllowedValue} class="btn btn-ok btn-enum-adder">Add</button>
+    <p>Allowed values: <span class="node-config-enum-value-list">{node.options.allowedValues.join(', ')}</span></p>
 </div>
 <div class="config-row">
-    <label for="default">Default value</label>
-    <select bind:value={node.options.defaultValue}>
-        <option></option>
+    <label class="inline-block">Default value</label>
+    <select bind:value={node.options.defaultValue} class="inline-block">
+        <option>None</option>
         {#each node.options.allowedValues as value}
             <option {value}>{value}</option>
         {/each}
