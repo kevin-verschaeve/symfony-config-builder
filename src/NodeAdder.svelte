@@ -4,6 +4,7 @@
     export let parent = null;
 
     let types = [
+        {value: '', text: ''},
         {value: "scalar", text: "Scalar"},
         {value: "boolean", text: "Boolean"},
         {value: "integer", text: "Integer"},
@@ -24,11 +25,16 @@
         node.parent = parent;
         selectedNode.set(node);
     }
+
+    const u = selectedNode.subscribe(node => {
+        if (!node) {
+            selected = types[0];
+        }
+    });
 </script>
 
 <div>
     <select bind:value={selected} on:change={selectNode}>
-        <option></option>
         {#each types as type}
         <option value="{type}">{type.text}</option>
         {/each}
