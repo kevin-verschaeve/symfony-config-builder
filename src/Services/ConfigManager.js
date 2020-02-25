@@ -1,5 +1,6 @@
 import { config } from '../stores.js';
 import { createNodeFromConfig } from './NodeFactory.js'
+import RootNode from '../Model/RootNode.js';
 
 export function load() {
     let storedConfig = localStorage.getItem('config');
@@ -19,7 +20,7 @@ export function save(config) {
 }
 
 export function clear() {
-    config.set([]);
+    config.set([new RootNode('changeme')]);
 }
 
 export default {load, save, clear};

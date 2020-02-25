@@ -20,8 +20,6 @@
     function buildTree() {
         if (configuration.length) {
             tree = getConfigTreeBuilder(configuration);
-        } else {
-            tree = '';
         }
     }
 
