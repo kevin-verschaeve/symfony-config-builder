@@ -7,6 +7,7 @@
     import FloatNodeComponent from './Node/FloatNodeComponent.svelte';
     import EnumNodeComponent from './Node/EnumNodeComponent.svelte';
     import ArrayNodeComponent from './Node/ArrayNodeComponent.svelte';
+    import RootNodeComponent from './Node/RootNodeComponent.svelte';
 
     export let node;
 
@@ -44,9 +45,12 @@
 </script>
 
 <div class="node-config">
-    <h2 class="node-config-title">Add a node of type "{node.type}"</h2>
+    <h2 class="node-config-title">{node.type == 'root' ? 'Edit root name' : `Add a node of type "${node.type}"`}</h2>
 
     <div class="config-form">
+        {#if node.type == 'root'}
+            <RootNodeComponent {node}/>
+        {:else}
         <div class="config-row">
             <label for="name-{node.id}">Name</label>
             <input id="name-{node.id}" type="text" bind:value={node.name}>
@@ -69,6 +73,7 @@
         </div>
 
         <svelte:component this={components[node.type]} {node}/>
+        {/if}
 
         <div class="config-row">
             <button on:click={configDone}>Done</button>

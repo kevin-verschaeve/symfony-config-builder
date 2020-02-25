@@ -1,6 +1,5 @@
 <script>
     import { config, selectedNode } from './stores.js';
-    import RootNodeComponent from './Node/RootNodeComponent.svelte';
     import NodeAdder from './NodeAdder.svelte';
     import RawNode from './RawNode.svelte';
     import NodeConfig from './NodeConfig.svelte';
@@ -8,11 +7,10 @@
 
     let configuration = [];
     const u = config.subscribe(conf => {
-        configuration = conf.filter(n => !n.parent && n.type != 'root');
+        configuration = conf.filter(n => !n.parent);
     });
 </script>
 
-<RootNodeComponent/>
 {#each configuration as node}
 <RawNode {node}/>
 {/each}

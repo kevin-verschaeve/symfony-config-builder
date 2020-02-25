@@ -5,7 +5,8 @@ import RootNode from '../Model/RootNode.js';
 export function load() {
     let storedConfig = localStorage.getItem('config');
     if (!storedConfig) {
-        return [];
+        restart();
+        return;
     }
 
     let configuration = [];
@@ -19,8 +20,8 @@ export function save(config) {
     localStorage.setItem('config', JSON.stringify(config));
 }
 
-export function clear() {
+export function restart() {
     config.set([new RootNode('changeme')]);
 }
 
-export default {load, save, clear};
+export default {load, save, restart};

@@ -32,7 +32,7 @@
     }
 
     function clear() {
-        ConfigManager.clear();
+        ConfigManager.restart();
     }
 
     let copied = false;
