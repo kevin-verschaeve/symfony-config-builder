@@ -36,10 +36,18 @@
     }
 
     let copied = false;
-    function copyToClipBoard() {
+    function copyPHP() {
+        copyToClipBoard(tree);
+    }
+
+    function copyYaml() {
+        copyToClipBoard(yamlConfig);
+    }
+
+    function copyToClipBoard(content) {
         navigator.permissions.query({name: "clipboard-write"}).then(result => {
             if (result.state == "granted" || result.state == "prompt") {
-                navigator.clipboard.writeText(tree).then(() => {
+                navigator.clipboard.writeText(content).then(() => {
                     copied = true;
                     setTimeout(() => {copied = false;}, 2000);
                 }, () => {
@@ -56,20 +64,21 @@
     <button on:click={buildYamlConfig}>{yaml ? 'Builder' : 'To Yaml'}</button>
     <button on:click={clear}>Clear</button>
     {/if}
+    {#if copied}
+        <div id="copy-message">Copied to clipboard !</div>
+    {/if}
 </div>
 <div class="flexbox-container">
     <div class="configuration" class:yaml>
         {#if yaml}
+            <button on:click={copyYaml} class="btn-copy">Copy to clipboard</button>
             <Highlight language={yamlLang} code={yamlConfig}/>
         {:else}
             <Configuration/>
         {/if}
     </div>
     <div id="code-panel">
-        <button on:click={copyToClipBoard} id="btn-copy">Copy to clipboard</button>
-        {#if copied}
-            Copied to clipboard !
-        {/if}
+        <button on:click={copyPHP} class="btn-copy">Copy to clipboard</button>
         <Highlight language={php} code={
 `<?php
 
