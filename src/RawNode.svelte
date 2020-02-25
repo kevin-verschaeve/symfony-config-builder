@@ -16,7 +16,7 @@
 {#if node.type != 'root'}
 <div class="raw-node">
     <a href="#" on:click={edit} class="indent">{node.yaml()}</a>
-    <a href="#" on:click={remove} class="yaml-hidden"><img src="bin.svg" alt="[remove]" width="15"></a>
+    <a href="#" on:click={remove}><img src="bin.svg" alt="[remove]" width="15"></a>
 
     {#if node.type == 'array'}
         <div class="indent">

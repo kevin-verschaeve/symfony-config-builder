@@ -1,10 +1,10 @@
 <script>
     import { config, selectedNode } from './stores.js';
-    import { getConfigTreeBuilder } from './Services/ConfigWriter.js';
+    import { getConfigTreeBuilder, getConfigInYaml } from './Services/ConfigWriter.js';
     import Configuration from './Configuration.svelte';
     import ConfigManager from './Services/ConfigManager.js';
     import Highlight from 'svelte-highlight';
-    import { php } from 'svelte-highlight/languages';
+    import { php, yaml as yamlLang } from 'svelte-highlight/languages';
 
     ConfigManager.load();
 
@@ -20,6 +20,14 @@
     function buildTree() {
         if (configuration.length) {
             tree = getConfigTreeBuilder(configuration);
+        }
+    }
+
+    let yamlConfig;
+    function buildYamlConfig() {
+        yaml = !yaml;
+        if (yaml) {
+            yamlConfig = getConfigInYaml(configuration);
         }
     }
 
@@ -45,13 +53,17 @@
 <h1 class="center">Config Tree Builder Builder</h1>
 <div class="center">
     {#if configuration.length}
-    <button on:click={() => yaml = !yaml}>{yaml ? 'Builder' : 'To Yaml'}</button>
+    <button on:click={buildYamlConfig}>{yaml ? 'Builder' : 'To Yaml'}</button>
     <button on:click={clear}>Clear</button>
     {/if}
 </div>
 <div class="flexbox-container">
     <div class="configuration" class:yaml>
-        <Configuration/>
+        {#if yaml}
+            <Highlight language={yamlLang} code={yamlConfig}/>
+        {:else}
+            <Configuration/>
+        {/if}
     </div>
     <div id="code-panel">
         <button on:click={copyToClipBoard} id="btn-copy">Copy to clipboard</button>

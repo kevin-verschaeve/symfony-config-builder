@@ -5,6 +5,10 @@ export default class FloatNode extends ConfigNode {
         super(name, Object.assign({}, {min: null, max: null}, options));
     }
 
+    yaml() {
+        return `${this.name}: ${parseFloat(this.options.defaultValue) || 0.0}`;
+    }
+
     specific(spaces) {
         let php = '';
         if (this.options.defaultValue) {

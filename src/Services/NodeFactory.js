@@ -34,7 +34,6 @@ export function createNodeFromConfig(config) {
     node.type = config.type;
     node.options = config.options;
     node.parent = config.parent;
-    node.isNew = false;
 
     return node;
 }

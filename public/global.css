@@ -80,14 +80,6 @@ button:focus {
     padding: 10px;
 }
 
-.configuration.yaml {
-	white-space: pre;
-}
-
-.configuration.yaml .yaml-hidden {
-	display: none;
-}
-
 .raw-node {
 	padding-right: 15px;
 }

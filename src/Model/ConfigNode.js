@@ -16,7 +16,7 @@ export default class ConfigNode {
     }
 
     yaml() {
-        return `${this.name}: ${this.options.defaultValue}`;
+        return `${this.name}: '${this.options.defaultValue}'`;
     }
 
     php(spaces, subSpaces) {

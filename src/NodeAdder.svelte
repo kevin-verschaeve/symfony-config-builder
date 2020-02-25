@@ -26,7 +26,7 @@
     }
 </script>
 
-<div class="yaml-hidden">
+<div>
     <select bind:value={selected} on:change={selectNode}>
         <option></option>
         {#each types as type}
