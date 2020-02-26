@@ -20,7 +20,7 @@ export default class ConfigNode {
     }
 
     php(spaces, subSpaces) {
-        let php = `${spaces}->node('${this.name}', '${this.type}')`;
+        let php = `${spaces}->${this.type}Node('${this.name}')`;
 
         if (true === this.options.required) {
             php += `\n${subSpaces}->isRequired()`;
