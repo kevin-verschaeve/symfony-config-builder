@@ -6,17 +6,17 @@ export default class EnumNode extends ConfigNode {
     }
 
     yaml() {
-        return `${this.name}: ['${this.options.allowedValues.join("', '")}']`;
+        return `${this.name}: [${this.options.allowedValues.join(", ")}]`;
     }
 
     specific(spaces) {
         let php = '';
 
         if (this.options.defaultValue) {
-            php += `\n${spaces}->defaultValue('${this.options.defaultValue}')`;
+            php += `\n${spaces}->defaultValue(${this.options.defaultValue})`;
         }
 
-        php += `\n${spaces}->values(['${this.options.allowedValues.join('\', \'')}'])`;
+        php += `\n${spaces}->values([${this.options.allowedValues.join(', ')}])`;
 
         return php;
     }
