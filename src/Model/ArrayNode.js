@@ -2,7 +2,14 @@ import ConfigNode from './ConfigNode.js';
 
 export default class ArrayNode extends ConfigNode {
     constructor(name = '', options = {}) {
-        super(name, Object.assign({}, {isPrototype: false}, options));
+        super(name, Object.assign({}, {
+            isPrototype: false,
+            prototypeType: null,
+            requiresAtLeastOneElement: false,
+            ignoreExtraKeys: false,
+            addDefaultIfNotSet: false,
+            useAttributeAsKey: null,
+        }, options));
     }
 
     children(config) {
@@ -16,8 +23,24 @@ export default class ArrayNode extends ConfigNode {
     php(spaces, subSpaces, config = []) {
         let php = `${spaces}->arrayNode('${this.name}')`;
 
-        if (null !== this.options.required) {
-            php += `\n${subSpaces}->isRequired(${this.options.required})`;
+        if (this.options.required) {
+            php += `\n${subSpaces}->isRequired()`;
+        }
+
+        if (this.options.required && this.options.requiresAtLeastOneElement) {
+            php += `\n${subSpaces}->requiresAtLeastOneElement()`;
+        }
+
+        if (this.options.ignoreExtraKeys) {
+            php += `\n${subSpaces}->ignoreExtraKeys()`;
+        }
+
+        if (this.options.addDefaultIfNotSet) {
+            php += `\n${subSpaces}->addDefaultIfNotSet()`;
+        }
+
+        if (this.options.useAttributeAsKey) {
+            php += `\n${subSpaces}->useAttributeAsKey('${this.options.useAttributeAsKey}')`;
         }
 
         if (this.options.cannotBeEmpty) {
