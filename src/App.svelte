@@ -5,6 +5,7 @@
     import ConfigManager from './Services/ConfigManager.js';
     import Highlight from 'svelte-highlight';
     import { php, yaml as yamlLang } from 'svelte-highlight/languages';
+    import 'svelte-highlight/styles/monokai-sublime.css';
 
     ConfigManager.load();
 
