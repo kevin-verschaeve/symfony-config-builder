@@ -4,16 +4,9 @@ export function getConfigTreeBuilder(configuration) {
     let spaces = space.repeat(indent)
 
     let tree = spaces;
-    // write root node first
-    // todo, find a way to set root always first, so this for can be removed
-    for (let node of configuration) {
-        if (node.type == 'root') {
-            tree += `${node.php()}\n`;
-            break;
-        }
-    }
 
-    // write others nodes
+    tree += `${configuration.find(n => n.type == 'root').php()}\n`;
+
     for (let node of configuration.filter(n => !n.parent)) {
         if (node.type == 'root') {
             continue;
@@ -29,12 +22,7 @@ export function getConfigTreeBuilder(configuration) {
 export function getConfigInYaml(configuration, level = 1) {
     let yaml = '';
 
-    for (let node of configuration) {
-        if (node.type == 'root') {
-            yaml += `${node.yaml()}\n`;
-            break;
-        }
-    }
+    yaml += `${configuration.find(n => n.type == 'root').yaml()}\n`;
 
     for (let node of configuration.filter(n => !n.parent && n.type != 'root')) {
         yaml += `${' '.repeat(2 * level)}${node.yaml()}\n`;
