@@ -44,4 +44,8 @@ export default class ConfigNode {
     specific() {
         return '';
     }
+
+    canHaveChildren() {
+        return this.type == 'array' && ((this.options.isPrototype && this.options.prototypeType == 'array') || !this.options.isPrototype);
+    }
 }

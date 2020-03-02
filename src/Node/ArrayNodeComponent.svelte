@@ -1,5 +1,14 @@
 <script>
 export let node;
+
+let types = [
+    'array',
+    'scalar',
+    'boolean',
+    'integer',
+    'float',
+];
+
 </script>
 
 <div class="config-row">
@@ -8,10 +17,22 @@ export let node;
         <label for="prototype-{node.id}" class="node-config-checkbox-label">Prototype ?</label>
     </div>
 
-    <div class="config-row">
-        <label for="attribue-as-key-{node.id}">Use attribute as key</label>
-        <input id="attribue-as-key-{node.id}" type="text" bind:value={node.options.useAttributeAsKey}>
-    </div>
+    {#if node.options.isPrototype}
+        <div class="inline-block">
+            <select bind:value={node.options.prototypeType}>
+                {#each types as type}
+                <option value="{type}">{type}</option>
+                {/each}
+            </select>
+        </div>
+
+        {#if node.options.prototypeType == 'array'}
+        <div class="config-row">
+            <label for="attribue-as-key-{node.id}">Use attribute as key</label>
+            <input id="attribue-as-key-{node.id}" type="text" bind:value={node.options.useAttributeAsKey}>
+        </div>
+        {/if}
+    {/if}
 </div>
 
 <div class="config-row">

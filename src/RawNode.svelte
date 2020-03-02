@@ -19,7 +19,7 @@
     <a href="#" on:click={remove}><img src="bin.svg" alt="[remove]" width="15"></a>
     {/if}
 
-    {#if node.type == 'array'}
+    {#if node.canHaveChildren()}
         <div class="indent">
             {#each node.children($config) as child}
             <svelte:self node={child}></svelte:self>

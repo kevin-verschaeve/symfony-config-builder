@@ -26,7 +26,7 @@ export function getConfigInYaml(configuration, level = 1) {
 
     for (let node of configuration.filter(n => !n.parent && n.type != 'root')) {
         yaml += `${' '.repeat(2 * level)}${node.yaml()}\n`;
-        if (node.type == 'array') {
+        if (node.canHaveChildren()) {
             yaml += getChildrenConfigInYaml(configuration, node, level + 1);
         }
     }
@@ -38,7 +38,7 @@ function getChildrenConfigInYaml(configuration, parent, level) {
     let yaml = '';
     for (let node of configuration.filter(n => n.parent == parent.id)) {
         yaml += `${' '.repeat(2 * level)}${node.yaml()}\n`;
-        if (node.type == 'array') {
+        if (node.canHaveChildren()) {
             yaml += getChildrenConfigInYaml(configuration, node, level + 1);
         }
     }

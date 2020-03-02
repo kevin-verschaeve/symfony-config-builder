@@ -4,7 +4,7 @@ export default class ArrayNode extends ConfigNode {
     constructor(name = '', options = {}) {
         super(name, Object.assign({}, {
             isPrototype: false,
-            prototypeType: null,
+            prototypeType: 'array',
             requiresAtLeastOneElement: false,
             ignoreExtraKeys: false,
             addDefaultIfNotSet: false,
@@ -17,6 +17,19 @@ export default class ArrayNode extends ConfigNode {
     }
 
     yaml() {
+        if (this.options.isPrototype && this.options.prototypeType != 'array') {
+            switch (this.options.prototypeType) {
+                case 'scalar':
+                    return `${this.name}: ['example', 'default', 'anything']`;
+                case 'integer':
+                    return `${this.name}: [42, 59, 77, 93]`;
+                case 'float':
+                    return `${this.name}: [42.24, 59.95, 77.77]`;
+                case 'boolean':
+                    return `${this.name}: [true, false]`;
+            }
+        }
+
         return `${this.name}:`;
     }
 
@@ -49,6 +62,12 @@ export default class ArrayNode extends ConfigNode {
 
         if (this.options.info) {
             php += `\n${subSpaces}->info('${this.options.info}')`;
+        }
+
+        if (this.options.isPrototype && this.options.prototypeType != 'array') {
+            php += `\n${subSpaces}->${this.options.prototypeType}Prototype()->end()\n${spaces}->end()`;
+
+            return php;
         }
 
         php += `\n${this.options.isPrototype ? `${subSpaces}->arrayPrototype()\n${subSpaces + '    '}` : `${subSpaces}`}->children()`;
