@@ -6,7 +6,7 @@ export default class IntegerNode extends ConfigNode {
     }
 
     yaml() {
-        return `${this.name}: ${parseInt(this.options.defaultValue) || 0.0}`;
+        return `${this.name}: ${parseInt(this.options.defaultValue) || 0}`;
     }
 
     specific(spaces) {
