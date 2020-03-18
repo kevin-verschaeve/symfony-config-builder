@@ -6,6 +6,10 @@ import EnumNode from '../Model/EnumNode.js';
 import ArrayNode from '../Model/ArrayNode.js';
 import RootNode from '../Model/RootNode.js';
 
+export function createRoot(name = 'changeme') {
+    return new RootNode(name);
+}
+
 export function createNode(type) {
     switch (type) {
         case 'scalar':
