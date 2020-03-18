@@ -5,6 +5,7 @@ export let node;
 <div class="config-row">
     <label class="inline-block">Default value</label>
     <select bind:value={node.options.defaultValue} class="inline-block">
+        <option value="">No default value</option>
         <option value="true">true</option>
         <option value="false">false</option>
     </select>

@@ -2,7 +2,7 @@ import ConfigNode from './ConfigNode.js';
 
 export default class BooleandNode extends ConfigNode {
     constructor(name = '', options = {}) {
-        super(name, Object.assign({}, {defaultValue: true}, options));
+        super(name, Object.assign({}, {defaultValue: null}, options));
     }
 
     yaml() {
