@@ -53,7 +53,7 @@
         {:else}
         <div class="config-row">
             <label for="name-{node.id}">Name</label>
-            <input id="name-{node.id}" type="text" bind:value={node.name}>
+            <input id="name-{node.id}" type="text" bind:value={node.name} autofocus>
         </div>
         <div class="config-row">
             <input id="required-{node.id}" type="checkbox" bind:checked={node.options.required} class="node-config-checkbox">
