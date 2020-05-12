@@ -257,6 +257,10 @@ button:focus {
     cursor: pointer;
 }
 
+.btn-remove:hover {
+    box-shadow: 1px 0px 4px grey;
+}
+
 .btn-enum-remover {
 	background: none;
 	padding: 0;

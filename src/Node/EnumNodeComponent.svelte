@@ -23,7 +23,7 @@
         {#each node.options.allowedValues as allowedValue, i}
             <span class="node-config-enum-value-list">
                 {allowedValue}
-                <button class="btn-enum-remover" on:click={() => removeAllowedValue(i)}>&times;</button>
+                <button class="btn-enum-remover" title="Remove" on:click={() => removeAllowedValue(i)}>&times;</button>
             </span>
         {/each}
     </p>

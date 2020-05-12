@@ -13,7 +13,7 @@
 <div class="raw-node">
     <a href="#" on:click={edit} class:indent={node.type != 'root'}>{node.yaml()}</a>
     {#if node.type != 'root'}
-    <button on:click={remove} class="btn-remove">&times;</button>
+    <button on:click={remove} class="btn-remove" title="Remove">&times;</button>
     {/if}
 
     {#if node.canHaveChildren()}
