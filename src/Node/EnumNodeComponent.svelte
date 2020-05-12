@@ -23,9 +23,7 @@
         {#each node.options.allowedValues as allowedValue, i}
             <span class="node-config-enum-value-list">
                 {allowedValue}
-                <button class="btn-unstyled" on:click={() => removeAllowedValue(i)}>
-                    <img src="bin.svg" alt="[remove]" width="12">
-                </button>
+                <button class="btn-enum-remover" on:click={() => removeAllowedValue(i)}>&times;</button>
             </span>
         {/each}
     </p>
