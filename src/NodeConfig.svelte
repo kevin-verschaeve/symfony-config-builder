@@ -1,6 +1,5 @@
 <script>
     import { config, selectedNode } from './stores.js';
-    import { createNode } from './Services/NodeFactory.js';
     import ScalarNodeComponent from './Node/ScalarNodeComponent.svelte';
     import BooleanNodeComponent from './Node/BooleanNodeComponent.svelte';
     import IntegerNodeComponent from './Node/IntegerNodeComponent.svelte';
@@ -20,7 +19,7 @@
         array: ArrayNodeComponent,
     };
 
-    function configDone() {
+    const configDone = () => {
         if (!node.name) {
             return;
         }
@@ -39,9 +38,7 @@
         selectedNode.set(null);
     }
 
-    function cancel() {
-        selectedNode.set(null);
-    }
+    const cancel = () => selectedNode.set(null);
 </script>
 
 <div class="node-config">

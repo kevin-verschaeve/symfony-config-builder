@@ -3,7 +3,7 @@
     import { createNode } from './Services/NodeFactory.js'
     export let parent = null;
 
-    let types = [
+    const types = [
         {value: '', text: ''},
         {value: "scalar", text: "Scalar"},
         {value: "boolean", text: "Boolean"},
@@ -14,14 +14,14 @@
     ];
 
     let selected;
-    function selectNode() {
+    const selectNode = () => {
         if (!selected.value) {
             selectedNode.set(null);
 
             return;
         }
 
-        let node = createNode(selected.value);
+        const node = createNode(selected.value);
         node.parent = parent;
         selectedNode.set(node);
     }

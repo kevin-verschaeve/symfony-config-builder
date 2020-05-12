@@ -1,7 +1,7 @@
 <script>
 export let node;
 
-let types = [
+const types = [
     'array',
     'scalar',
     'boolean',

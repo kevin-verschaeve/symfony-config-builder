@@ -2,7 +2,7 @@
     export let node;
 
     let newValue;
-    function addAllowedValue() {
+    const addAllowedValue = () => {
         if (!newValue.trim()) {
             return;
         }
@@ -11,9 +11,7 @@
         newValue = null;
     }
 
-    function removeAllowedValue(index) {
-        node.options.allowedValues = [...node.options.allowedValues.slice(0, index), ...node.options.allowedValues.slice(index + 1)];
-    }
+    const removeAllowedValue = (index) => node.options.allowedValues = [...node.options.allowedValues.slice(0, index), ...node.options.allowedValues.slice(index + 1)];
 </script>
 
 <div class="config-row">

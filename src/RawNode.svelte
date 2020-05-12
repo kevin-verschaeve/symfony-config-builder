@@ -3,11 +3,8 @@
     import NodeAdder from './NodeAdder.svelte';
     export let node;
 
-    function edit() {
-        selectedNode.set(node);
-    }
-
-    function remove() {
+    const edit = () => selectedNode.set(node);
+    const remove = () => {
         config.update(conf => conf.filter(n => n.id != node.id));
         selectedNode.set(null);
     }

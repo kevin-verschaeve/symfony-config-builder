@@ -12,40 +12,34 @@
     let tree;
     let configuration = [];
     let yaml = false;
+
+    const buildTree = () => {
+        if (configuration.length) {
+            tree = getConfigTreeBuilder(configuration);
+        }
+    }
+
     const u = config.subscribe(conf => {
         configuration = conf;
         ConfigManager.save($config);
         buildTree();
     });
 
-    function buildTree() {
-        if (configuration.length) {
-            tree = getConfigTreeBuilder(configuration);
-        }
-    }
-
     let yamlConfig;
-    function buildYamlConfig() {
+    const buildYamlConfig = () => {
         yaml = !yaml;
         if (yaml) {
             yamlConfig = getConfigInYaml(configuration);
         }
     }
 
-    function clear() {
-        ConfigManager.restart();
-    }
+    const clear = () => ConfigManager.restart();
 
     let copied = false;
-    function copyPHP() {
-        copyToClipBoard(tree);
-    }
+    const copyPHP = () => copyToClipBoard(tree);
+    const copyYaml = () => copyToClipBoard(yamlConfig);
 
-    function copyYaml() {
-        copyToClipBoard(yamlConfig);
-    }
-
-    function copyToClipBoard(content) {
+    const copyToClipBoard = (content) => {
         navigator.permissions.query({name: "clipboard-write"}).then(result => {
             if (result.state == "granted" || result.state == "prompt") {
                 navigator.clipboard.writeText(content).then(() => {

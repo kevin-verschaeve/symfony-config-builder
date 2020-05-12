@@ -1,7 +1,7 @@
-export function getConfigTreeBuilder(configuration) {
-    let space = '    ';
-    let indent = 2;
-    let spaces = space.repeat(indent)
+export const getConfigTreeBuilder = (configuration) => {
+    const space = '    ';
+    const indent = 2;
+    const spaces = space.repeat(indent)
 
     let tree = spaces;
 
@@ -19,7 +19,7 @@ export function getConfigTreeBuilder(configuration) {
     return tree;
 }
 
-export function getConfigInYaml(configuration, level = 1) {
+export const getConfigInYaml = (configuration, level = 1) => {
     let yaml = '';
 
     yaml += `${configuration.find(n => n.type == 'root').yaml()}\n`;
@@ -34,7 +34,7 @@ export function getConfigInYaml(configuration, level = 1) {
     return yaml;
 }
 
-function getChildrenConfigInYaml(configuration, parent, level) {
+const getChildrenConfigInYaml = (configuration, parent, level) => {
     let yaml = '';
     for (let node of configuration.filter(n => n.parent == parent.id)) {
         yaml += `${' '.repeat(2 * level)}${node.yaml()}\n`;

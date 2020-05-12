@@ -6,11 +6,9 @@ import EnumNode from '../Model/EnumNode.js';
 import ArrayNode from '../Model/ArrayNode.js';
 import RootNode from '../Model/RootNode.js';
 
-export function createRoot(name = 'changeme') {
-    return new RootNode(name);
-}
+export const createRoot = (name = 'changeme') => new RootNode(name);
 
-export function createNode(type) {
+export const createNode = (type) => {
     switch (type) {
         case 'scalar':
             return new ScalarNode();
@@ -31,7 +29,7 @@ export function createNode(type) {
     }
 }
 
-export function createNodeFromConfig(config) {
+export const createNodeFromConfig = (config) => {
     let node = createNode(config.type);
     node.name = config.name;
     node.id = config.id;
