@@ -12,32 +12,17 @@
     let tree;
     let configuration = [];
     let yaml = false;
+    let copied = false;
 
-    const buildTree = () => {
-        if (configuration.length) {
-            tree = getConfigTreeBuilder(configuration);
-        }
-    }
+    $: tree = getConfigTreeBuilder(configuration);
+    $: yamlConfig = yaml && getConfigInYaml(configuration);
 
     const u = config.subscribe(conf => {
         configuration = conf;
         ConfigManager.save($config);
-        buildTree();
     });
 
-    let yamlConfig;
-    const buildYamlConfig = () => {
-        yaml = !yaml;
-        if (yaml) {
-            yamlConfig = getConfigInYaml(configuration);
-        }
-    }
-
     const clear = () => ConfigManager.restart();
-
-    let copied = false;
-    const copyPHP = () => copyToClipBoard(tree);
-    const copyYaml = () => copyToClipBoard(yamlConfig);
 
     const copyToClipBoard = (content) => {
         navigator.permissions.query({name: "clipboard-write"}).then(result => {
@@ -56,7 +41,7 @@
 <h1 class="center">Config Tree Builder Builder</h1>
 <div class="center">
     {#if configuration.length}
-    <button on:click={buildYamlConfig}>{yaml ? 'Builder' : 'To Yaml'}</button>
+    <button on:click={() => yaml = !yaml}>{yaml ? 'Builder' : 'To Yaml'}</button>
     <button on:click={clear}>Clear</button>
     {/if}
     {#if copied}
@@ -66,14 +51,14 @@
 <div class="flexbox-container">
     <div class="configuration" class:yaml>
         {#if yaml}
-            <button on:click={copyYaml} class="btn-copy">Copy to clipboard</button>
+            <button on:click={copyToClipBoard(yamlConfig)} class="btn-copy">Copy to clipboard</button>
             <Highlight language={yamlLang} code={yamlConfig}/>
         {:else}
             <Configuration/>
         {/if}
     </div>
     <div id="code-panel">
-        <button on:click={copyPHP} class="btn-copy">Copy to clipboard</button>
+        <button on:click={copyToClipBoard(tree)} class="btn-copy">Copy to clipboard</button>
         <Highlight language={php} code={
 `<?php
 
