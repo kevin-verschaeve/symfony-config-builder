@@ -2,7 +2,7 @@ import { config } from '../stores.js';
 import { createRoot, createNodeFromConfig } from './NodeFactory.js'
 
 export const load = () => {
-    let storedConfig = localStorage.getItem('config');
+    let storedConfig = localStorage.getItem('configuration');
     if (!storedConfig) {
         restart();
         return;
@@ -15,7 +15,7 @@ export const load = () => {
     config.set(configuration);
 }
 
-export const save = (config) => localStorage.setItem('config', JSON.stringify(config));
+export const save = (config) => localStorage.setItem('configuration', JSON.stringify(config));
 
 export const restart = () => config.set([createRoot()]);
 

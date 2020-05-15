@@ -33,10 +33,8 @@
     });
 </script>
 
-<div>
-    <select bind:value={selected} on:change={selectNode}>
-        {#each types as type}
-        <option value="{type}">{type.text}</option>
-        {/each}
-    </select>
-</div>
+<select bind:value={selected} on:change={selectNode} class="node-adder">
+    {#each types as type}
+    <option value="{type}">{type.text}</option>
+    {/each}
+</select>

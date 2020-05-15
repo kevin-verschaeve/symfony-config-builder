@@ -87,18 +87,38 @@ button:focus {
 }
 
 .raw-node {
-	padding-right: 15px;
+	padding: 4px 0;
 }
 
 .configuration .indent {
-	margin-left: 20px;
+	margin-left: 15px;
+}
+
+.tree {
+	position: relative;
+}
+
+.tree:before {
+    content: '';
+    position: absolute;
+    top: 5px;
+    bottom: 15px;
+    left: 2px;
+	border-left: 1px dashed rgb(0, 80, 160);
+    border-bottom: 1px dashed rgb(0, 80, 160);
+	width: 5px;
+}
+
+.node-adder {
+	margin: 0;
+	margin-left: 15px;;
 }
 
 .configuration.yaml {
 	position: relative;
 }
 
-.node-config--modal {
+.node-config {
 	padding: 10px;
 	background-color: #FFF;
 }
@@ -156,7 +176,7 @@ button:focus {
 }
 
 .node-config .config-form .config-row input[type="text"].node-config-enum-value-adder {
-	width: 80%;
+	width: 78%;
 	display: inline-block;
 }
 
@@ -253,7 +273,8 @@ button:focus {
     border: 1px solid red;
     color: red;
     border-radius: 50%;
-    padding: 0 4px;
+	padding: 0 4px;
+	margin: 0;
     cursor: pointer;
 }
 
@@ -263,6 +284,7 @@ button:focus {
 
 .btn-enum-remover {
 	background: none;
+	border: none;
 	padding: 0;
 	margin: 0;
     cursor: pointer;

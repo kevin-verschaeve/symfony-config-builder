@@ -31,7 +31,7 @@
 <div class="config-row">
     <label class="inline-block">Default value</label>
     <select bind:value={node.options.defaultValue} class="inline-block">
-        <option>None</option>
+        <option value="">None</option>
         {#each node.options.allowedValues as value}
             <option {value}>{value}</option>
         {/each}

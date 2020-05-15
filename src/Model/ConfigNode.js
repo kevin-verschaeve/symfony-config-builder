@@ -19,7 +19,7 @@ export default class ConfigNode {
         return `${this.name}: '${this.options.defaultValue}'`;
     }
 
-    php(spaces, subSpaces) {
+    php(spaces, subSpaces, configuration) {
         let php = `${spaces}->${this.type}Node('${this.name}')`;
 
         if (true === this.options.required) {
@@ -34,9 +34,11 @@ export default class ConfigNode {
             php += `\n${subSpaces}->info('${this.options.info}')`;
         }
 
-        php += this.specific(subSpaces);
+        const specific = this.specific(subSpaces, configuration)
+        php += specific;
 
-        php += `\n${spaces}->end()`;
+        const hasSubRules = this.options.required || this.options.cannotBeEmpty || this.options.info || specific.length;
+        php += `${hasSubRules ? `\n${spaces}` : ''}->end()`;
 
         return php;
     }
@@ -46,6 +48,14 @@ export default class ConfigNode {
     }
 
     canHaveChildren() {
-        return this.type == 'array' && ((this.options.isPrototype && this.options.prototypeType == 'array') || !this.options.isPrototype);
+        return false;
+    }
+
+    children(config) {
+        return config.filter(n => n.parent == this.id);
+    }
+
+    remove(config) {
+        return config.filter(n => n.id != this.id);
     }
 }

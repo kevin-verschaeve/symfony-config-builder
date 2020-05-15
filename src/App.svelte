@@ -1,26 +1,23 @@
 <script>
     import { config, selectedNode } from './stores.js';
     import { getConfigTreeBuilder, getConfigInYaml } from './Services/ConfigWriter.js';
-    import Configuration from './Configuration.svelte';
     import ConfigManager from './Services/ConfigManager.js';
     import Highlight from 'svelte-highlight';
     import { php, yaml as yamlLang } from 'svelte-highlight/languages';
+    import RawNode from './RawNode.svelte';
+    import NodeConfig from './NodeConfig.svelte';
+    import Modal from './Modal.svelte';
     import 'svelte-highlight/styles/monokai-sublime.css';
 
     ConfigManager.load();
 
-    let tree;
-    let configuration = [];
     let yaml = false;
     let copied = false;
 
-    $: tree = getConfigTreeBuilder(configuration);
-    $: yamlConfig = yaml && getConfigInYaml(configuration);
-
-    const u = config.subscribe(conf => {
-        configuration = conf;
-        ConfigManager.save($config);
-    });
+    $: root = $config.find(n => n.type == 'root');
+    $: tree = getConfigTreeBuilder($config);
+    $: yamlConfig = yaml && getConfigInYaml($config)
+    $: {ConfigManager.save($config);}
 
     const clear = () => ConfigManager.restart();
 
@@ -40,7 +37,7 @@
 
 <h1 class="center">Config Tree Builder Builder</h1>
 <div class="center">
-    {#if configuration.length}
+    {#if $config.length}
     <button on:click={() => yaml = !yaml}>{yaml ? 'Builder' : 'To Yaml'}</button>
     <button on:click={clear}>Clear</button>
     {/if}
@@ -54,7 +51,7 @@
             <button on:click={copyToClipBoard(yamlConfig)} class="btn-copy">Copy to clipboard</button>
             <Highlight language={yamlLang} code={yamlConfig}/>
         {:else}
-            <Configuration/>
+            <RawNode node={root}/>
         {/if}
     </div>
     <div id="code-panel">
@@ -77,6 +74,12 @@ ${tree}
 />
         </div>
 </div>
+
+{#if $selectedNode}
+<Modal on:close="{() => selectedNode.set(null)}">
+    <NodeConfig node={$selectedNode}/>
+</Modal>
+{/if}
 
 <div id="logos">
     <a href="https://github.com/kevin-verschaeve/symfony-config-builder" target="_blank" title="Contribute">

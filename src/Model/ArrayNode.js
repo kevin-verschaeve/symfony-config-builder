@@ -12,8 +12,24 @@ export default class ArrayNode extends ConfigNode {
         }, options));
     }
 
-    children(config) {
-        return config.filter(n => n.parent == this.id);
+    canHaveChildren() {
+        if (!this.options.isPrototype) {
+            return true;
+        }
+
+        return this.options.prototypeType == 'array';
+    }
+
+    remove(config) {
+        if (!this.canHaveChildren || this.children(config).length == 0) {
+            return super.remove(config);
+        }
+
+        for (let child of this.children(config)) {
+            config = child.remove(config);
+        }
+
+        return super.remove(config);
     }
 
     yaml() {
@@ -33,12 +49,8 @@ export default class ArrayNode extends ConfigNode {
         return `${this.name}:`;
     }
 
-    php(spaces, subSpaces, config = []) {
-        let php = `${spaces}->arrayNode('${this.name}')`;
-
-        if (this.options.required) {
-            php += `\n${subSpaces}->isRequired()`;
-        }
+    specific(subSpaces, config) {
+        let php = '';
 
         if (this.options.required && this.options.requiresAtLeastOneElement) {
             php += `\n${subSpaces}->requiresAtLeastOneElement()`;
@@ -56,16 +68,8 @@ export default class ArrayNode extends ConfigNode {
             php += `\n${subSpaces}->useAttributeAsKey('${this.options.useAttributeAsKey}')`;
         }
 
-        if (this.options.cannotBeEmpty) {
-            php += `\n${subSpaces}->cannotBeEmpty()`;
-        }
-
-        if (this.options.info) {
-            php += `\n${subSpaces}->info('${this.options.info}')`;
-        }
-
         if (this.options.isPrototype && this.options.prototypeType != 'array') {
-            php += `\n${subSpaces}->${this.options.prototypeType}Prototype()->end()\n${spaces}->end()`;
+            php += `\n${subSpaces}->${this.options.prototypeType}Prototype()->end()`;
 
             return php;
         }
@@ -76,8 +80,8 @@ export default class ArrayNode extends ConfigNode {
             php += `\n${child.php(subSpaces + '    '.repeat(this.options.isPrototype ? 2 : 1), subSpaces + '    '.repeat(this.options.isPrototype ? 3 : 2), config)}`;
         }
 
-        php += `\n${this.options.isPrototype ? subSpaces + '    ' : subSpaces}->end()\n`;
-        php += `${this.options.isPrototype ? `${subSpaces}->end()\n` : ''}${spaces}->end()`;
+        php += `\n${this.options.isPrototype ? subSpaces + '    ' : subSpaces}->end()`;
+        php += `${this.options.isPrototype ? `\n${subSpaces}->end()` : ''}`;
 
         return php;
     }

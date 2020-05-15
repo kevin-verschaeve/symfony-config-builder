@@ -5,7 +5,7 @@
 
     const edit = () => selectedNode.set(node);
     const remove = () => {
-        config.update(conf => conf.filter(n => n.id != node.id));
+        config.update(conf => node.remove($config));
         selectedNode.set(null);
     }
 </script>
@@ -17,7 +17,7 @@
     {/if}
 
     {#if node.canHaveChildren()}
-        <div class="indent">
+        <div class:indent={node.type != 'root'} class="tree">
             {#each node.children($config) as child}
             <svelte:self node={child}></svelte:self>
             {/each}

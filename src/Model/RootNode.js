@@ -12,4 +12,8 @@ export default class RootNode extends ConfigNode {
     getType() {
         return 'root';
     }
+
+    canHaveChildren() {
+        return true;
+    }
 }
