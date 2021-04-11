@@ -170,9 +170,10 @@ button:focus {
     right: 6%;
 }
 
-.svelte-highlight {
+.hljs {
 	margin: 0;
 	border-radius: 10px;
+	min-height: 40px;
 }
 
 .node-config .config-form .config-row input[type="text"].node-config-enum-value-adder {

@@ -2,7 +2,7 @@
     import { config, selectedNode } from './stores.js';
     import { getConfigTreeBuilder, getConfigInYaml } from './Services/ConfigWriter.js';
     import ConfigManager from './Services/ConfigManager.js';
-    import Highlight from 'svelte-highlight';
+    import { Highlight } from 'svelte-highlight';
     import { php, yaml as yamlLang } from 'svelte-highlight/languages';
     import RawNode from './RawNode.svelte';
     import NodeConfig from './NodeConfig.svelte';
