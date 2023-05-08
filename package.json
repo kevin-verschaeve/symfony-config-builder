@@ -18,6 +18,6 @@
   },
   "dependencies": {
     "sirv-cli": "1.0",
-    "svelte-highlight": "^0.7"
+    "svelte-highlight": "^7.2"
   }
 }
